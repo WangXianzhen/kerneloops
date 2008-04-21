@@ -136,6 +136,16 @@ static void write_logfile(int count)
 	closelog();
 }
 
+size_t writefunction( void *ptr, size_t size, size_t nmemb, void *stream)
+{
+	char *c;
+	c = malloc(size*nmemb + 1);
+	memset(c, 0, size*nmemb + 1);
+	memcpy(c, ptr, size*nmemb);
+	printf("received %s \n", c);
+	return size * nmemb;
+}
+
 void submit_queue(void)
 {
 	int result;
@@ -144,8 +154,8 @@ void submit_queue(void)
 	int count = 0;
 
 	if (testmode) {
-		print_queue();
-		return;
+//		print_queue();
+//		return;
 	}
 
 	queue = queued_oopses;
@@ -158,8 +168,9 @@ void submit_queue(void)
 		struct curl_httppost *last = NULL;
 		struct oops *next;
 
-
 		handle = curl_easy_init();
+
+		printf("DEBUG SUBMIT URL is %s \n", submit_url);
 		curl_easy_setopt(handle, CURLOPT_URL, submit_url);
 
 		/* set up the POST data */
@@ -174,6 +185,7 @@ void submit_queue(void)
 		}
 
 		curl_easy_setopt(handle, CURLOPT_HTTPPOST, post);
+		curl_easy_setopt(handle, CURLOPT_WRITEFUNCTION, writefunction);
 		result = curl_easy_perform(handle);
 
 		curl_formfree(post);
