@@ -170,6 +170,10 @@ static void extract_oops(char *buffer, int remove_syslog)
 				oopsstart = i;
 			if (strstr(c, "kernel BUG at"))
 				oopsstart = i;
+			if (strstr(c, "do_IRQ: stack overflow:"))
+				oopsstart = i;
+			if (strstr(c, "near stack overflow (cur:"))
+				oopsstart = i;
 			if (strstr(c, "double fault:"))
 				oopsstart = i;
 			if (strstr(c, "Badness at"))
