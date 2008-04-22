@@ -138,7 +138,7 @@ static void write_logfile(int count)
 
 char result_url[4096];
 
-size_t writefunction( void *ptr, size_t size, size_t nmemb, void *stream)
+size_t writefunction( void *ptr, size_t size, size_t nmemb, void __attribute((unused)) *stream)
 {
 	char *c, *c1, *c2;
 	c = malloc(size*nmemb + 1);
