@@ -172,9 +172,14 @@ int main(int argc, char**argv)
 	}
 
 
+
 	/* we scan dmesg before /var/log/messages; dmesg is a more accurate source normally */
 	scan_dmesg(NULL);
 	scan_filename("/var/log/messages", 1);
+
+	if (argc > 2 && strstr(argv[1], "--file"))
+		scan_filename(argv[2], 1);
+
 	if (testmode && argc > 2) {
 		int q;
 		for (q = 2; q < argc; q++) {
