@@ -101,11 +101,19 @@ void dbus_ask_permission(void)
 	dbus_message_unref(message);
 }
 
-void dbus_say_thanks(void)
+void dbus_say_thanks(char *url)
 {
 	DBusMessage *message;
 	if (!bus)
 		return;
+	if (url && strlen(url)) {
+		message = dbus_message_new_signal("/org/kerneloops/submit/url",
+			"org.kerneloops.submit.url", "url");
+		dbus_message_append_args (message, DBUS_TYPE_STRING, &url, DBUS_TYPE_INVALID);
+		dbus_connection_send(bus, message, NULL);
+		dbus_message_unref(message);
+	}
+
 	message = dbus_message_new_signal("/org/kerneloops/submit/sent",
 			"org.kerneloops.submit.sent", "sent");
 	dbus_connection_send(bus, message, NULL);
