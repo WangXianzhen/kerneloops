@@ -1,5 +1,9 @@
 0.11 - Jan 11 2008
 	* Improve the makefile (GregKH)
+	* Take various fixes from Chuck Ebbert (Red Hat) based on Fedora
+	  feedback 
+	* Put a link to the submitted oops in the "thanks" screen
+	* Consider stack overflow warnings also kernel badness
 0.10 - Jan 05 2008
 	* Fix some bugs found in the fedora package review process
 0.9 - Jan 03 2008
