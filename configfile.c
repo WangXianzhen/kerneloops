@@ -51,10 +51,17 @@ void read_config_file(char *filename)
 		return;
 	while (!feof(file)) {
 		char *c;
+		int len;
 		line = NULL;
 		if (getline(&line, &dummy, file) <= 0) {
 			free(line);
 			break;
+		}
+		len = strlen(line);
+		/* strip newline*/
+		if (line[len -1 ] == '\n') {
+			line[len - 1 ] = '\0';
+			len --;
 		}
 		if (line[0] == '#') {
 			free(line);
