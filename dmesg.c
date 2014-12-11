@@ -291,9 +291,9 @@ static void extract_oops(char *buffer, size_t buflen, int remove_syslog)
 				int len;
 				char *oops;
 
-				len = 2;
+				len = 1;
 				for (q = oopsstart; q <= oopsend; q++)
-					len += strlen(lines_info[q].ptr)+1;
+					len += strlen(lines_info[q].ptr)+2;
 
 				oops = calloc(len, 1);
 
@@ -330,11 +330,11 @@ static void extract_oops(char *buffer, size_t buflen, int remove_syslog)
 
 		oopsend = i-1;
 
-		len = 2;
+		len = 1;
 		while (oopsend > 0 && lines_info[oopsend].ptr == NULL)
 			oopsend--;
 		for (q = oopsstart; q <= oopsend; q++)
-			len += strlen(lines_info[q].ptr)+1;
+			len += strlen(lines_info[q].ptr)+2;
 
 		oops = calloc(len, 1);
 
