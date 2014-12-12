@@ -5,8 +5,8 @@ Summary:	Tool to automatically collect and submit kernel crash signatures
 
 Group:		System Environment/Base
 License:	GPLv2
-URL:		http://www.kerneloops.org
-Source0:	http://www.kerneloops.org/download/%{name}-%{version}.tar.gz
+URL:		https://github.com/oops-kernel-org/kerneloops
+Source0:	https://github.com/oops-kernel-org/kerneloops/archive/v%{version}.tar.gz
 
 BuildRoot:	%(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 
@@ -21,7 +21,7 @@ Requires(preun):	chkconfig, initscripts
 
 %description
 This package contains the tools to collect kernel crash signatures,
-and to submit them to the kerneloops.org website where the kernel
+and to submit them to the oops.kernel.org website where the kernel
 crash signatures get collected and grouped for presentation to the
 Linux kernel developers.
 

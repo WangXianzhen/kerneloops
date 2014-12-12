@@ -1,7 +1,7 @@
 /*
  * Copyright 2007, Intel Corporation
  *
- * This file is part of kerneloops.org
+ * This file is part of oops.kernel.org
  *
  * This program file is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -179,9 +179,9 @@ static void print_queue(void)
 static void write_logfile(int count, char *result_url)
 {
 	openlog("kerneloops", 0, LOG_KERN);
-	syslog(LOG_WARNING, "Submitted %i kernel oopses to www.kerneloops.org", count);
+	syslog(LOG_WARNING, "Submitted %i kernel oopses to oops.kernel.org", count);
 	if (result_url && result_url[0])
-		syslog(LOG_WARNING, "kerneloops.org: oops is posted as %s", result_url);
+		syslog(LOG_WARNING, "oops.kernel.org: oops is posted as %s", result_url);
 	closelog();
 }
 

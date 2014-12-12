@@ -27,10 +27,10 @@ msgstr "Échec de la connexion à D-BUS : %s\n"
 
 #: kerneloops-applet.c:190
 msgid ""
-"Diagnostic information from your Linux kernel has been sent to <a href=\"http://www.kerneloops.org\">www.kerneloops.org</a> for the Linux kernel developers to work on. \n"
+"Diagnostic information from your Linux kernel has been sent to <a href=\"http://oops.kernel.org\">oops.kernel.org</a> for the Linux kernel developers to work on. \n"
 "Thank you for contributing to improve the quality of the Linux kernel.\n"
 msgstr ""
-"Les informations de diagnostic de votre noyau Linux ont été envoyées à <a href=\"http://www.kerneloops.org\">www.kerneloops.org</a> afin que les développeurs du noyau Linux travaillent dessus. \n"
+"Les informations de diagnostic de votre noyau Linux ont été envoyées à <a href=\"http://oops.kernel.org\">oops.kernel.org</a> afin que les développeurs du noyau Linux travaillent dessus. \n"
 "Merci d'avoir contribué à l'amélioration de la qualité du noyau Linux.\n"
 
 #: kerneloops-applet.c:188
@@ -50,8 +50,8 @@ msgid "No"
 msgstr "Non"
 
 #: kerneloops-applet.c:143
-msgid "There is diagnostic information available for this failure. Do you want to submit this information to the <a href=\"http://www.kerneloops.org/\">www.kerneloops.org</a> website for use by the Linux kernel developers?\n"
-msgstr "Il y a des informations de diagnostic disponibles pour ce problème. Voulez-vous soumettre ces informations au site web <a href=\"http://www.kerneloops.org/\">www.kerneloops.org</a> pour l'usage des développeurs du noyau Linux ?\n"
+msgid "There is diagnostic information available for this failure. Do you want to submit this information to the <a href=\"http://oops.kernel.org/\">oops.kernel.org</a> website for use by the Linux kernel developers?\n"
+msgstr "Il y a des informations de diagnostic disponibles pour ce problème. Voulez-vous soumettre ces informations au site web <a href=\"http://oops.kernel.org/\">oops.kernel.org</a> pour l'usage des développeurs du noyau Linux ?\n"
 
 #: kerneloops-applet.c:172
 msgid "Yes"

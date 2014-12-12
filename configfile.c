@@ -1,7 +1,7 @@
 /*
  * Copyright 2007, Intel Corporation
  *
- * This file is part of kerneloops.org
+ * This file is part of oops.kernel.org
  *
  * This program file is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -103,7 +103,7 @@ void read_config_file(char *filename)
 	}
 	fclose(file);
 	if (!submit_url)
-		submit_url = strdup("http://submit.kerneloops.org/submitoops.php");
+		submit_url = strdup("http://oops.kernel.org/submitoops.php");
 	if (!log_file)
 		log_file = strdup("/var/log/messages");
 }

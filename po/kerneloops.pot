@@ -28,7 +28,7 @@ msgstr ""
 #: kerneloops-applet.c:190
 msgid ""
 "Diagnostic information from your Linux kernel has been sent to <a href="
-"\"http://www.kerneloops.org\">www.kerneloops.org</a> for the Linux kernel "
+"\"http://oops.kernel.org\">oops.kernel.org</a> for the Linux kernel "
 "developers to work on. \n"
 "Thank you for contributing to improve the quality of the Linux kernel.\n"
 msgstr ""
@@ -52,8 +52,8 @@ msgstr ""
 #: kerneloops-applet.c:143
 msgid ""
 "There is diagnostic information available for this failure. Do you want to "
-"submit this information to the <a href=\"http://www.kerneloops.org/\">www."
-"kerneloops.org</a> website for use by the Linux kernel developers?\n"
+"submit this information to the <a href=\"http://oops.kernel.org/\">www."
+"oops.kernel.org</a> website for use by the Linux kernel developers?\n"
 msgstr ""
 
 #: kerneloops-applet.c:172

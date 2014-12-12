@@ -27,12 +27,12 @@ msgstr "Järjestelmäväylään yhdistäminen epäonnistui: %s\n"
 #: kerneloops-applet.c:190
 msgid ""
 "Diagnostic information from your Linux kernel has been sent to <a href="
-"\"http://www.kerneloops.org\">www.kerneloops.org</a> for the Linux kernel "
+"\"http://oops.kernel.org\">oops.kernel.org</a> for the Linux kernel "
 "developers to work on. \n"
 "Thank you for contributing to improve the quality of the Linux kernel.\n"
 msgstr ""
 "Linux-ytimen vianmääritystiedot on lähetetty osoitteeseen <a "
-"href=\"http://www.kerneloops.org\">www.kerneloops.org</a> ytimen kehittäjien "
+"href=\"http://oops.kernel.org\">oops.kernel.org</a> ytimen kehittäjien "
 "käytettäväksi. Kiitos osallistumisestasi Linux-ytimen laadun parantamiseen.\n"
 
 #: kerneloops-applet.c:188
@@ -54,12 +54,12 @@ msgstr "Ei"
 #: kerneloops-applet.c:143
 msgid ""
 "There is diagnostic information available for this failure. Do you want to "
-"submit this information to the <a href=\"http://www.kerneloops.org/\">www."
-"kerneloops.org</a> website for use by the Linux kernel developers?\n"
+"submit this information to the <a href=\"http://oops.kernel.org/\">www."
+"oops.kernel.org</a> website for use by the Linux kernel developers?\n"
 msgstr ""
 "Tästä viasta on saatavilla vianmääritystietoja. Haluatko lähettää nämä "
 "tiedot <a "
-"href=\"http://www.kerneloops.org/\">www.kerneloops.org</a>-sivustolle Linux-"
+"href=\"http://oops.kernel.org/\">oops.kernel.org</a>-sivustolle Linux-"
 "ytimen kehittäjien käytettäväksi?\n"
 
 #: kerneloops-applet.c:172

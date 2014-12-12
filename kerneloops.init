@@ -4,7 +4,7 @@
 #
 # chkconfig:   345 90 88
 # description: A tool that collects and submits kernel crash \
-# signatures to the kerneloops.org website for use by the Linux \
+# signatures to the oops.kernel.org website for use by the Linux \
 # kernel developers.
 # processname: kerneloops
 # config:      /etc/kerneloops.conf
@@ -17,7 +17,7 @@
 # Required-Stop: $local_fs $remote_fs $syslog
 # Short-Description: Tool to automatically collect and submit kernel crash signatures
 # Description: A tool that collects and submits kernel crash
-#   signatures to the kerneloops.org website for use by the Linux
+#   signatures to the oops.kernel.org website for use by the Linux
 #   kernel developers.
 ### END INIT INFO
 
