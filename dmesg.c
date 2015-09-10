@@ -2,7 +2,7 @@
 /*
  * Copyright 2007, Intel Corporation
  *
- * This file is part of kerneloops.org
+ * This file is part of oops.kernel.org
  *
  * This program file is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -136,7 +136,7 @@ static int fill_lineinfo(char *buffer, size_t buflen, int remove_syslog)
 		*c9 = '\0'; /* turn the \n into a string termination */
 
 		/* if we see our own marker, we know we submitted everything upto here already */
-		if (memmem(linepointer, len, "www.kerneloops.org", 18)) {
+		if (memmem(linepointer, len, "oops.kernel.org", strlen("oops.kernel.org"))) {
 			linecount = 0;
 			lines_info[0].ptr = NULL;
 		}
@@ -291,9 +291,9 @@ static void extract_oops(char *buffer, size_t buflen, int remove_syslog)
 				int len;
 				char *oops;
 
-				len = 2;
+				len = 1;
 				for (q = oopsstart; q <= oopsend; q++)
-					len += strlen(lines_info[q].ptr)+1;
+					len += strlen(lines_info[q].ptr)+2;
 
 				oops = calloc(len, 1);
 
@@ -330,11 +330,11 @@ static void extract_oops(char *buffer, size_t buflen, int remove_syslog)
 
 		oopsend = i-1;
 
-		len = 2;
+		len = 1;
 		while (oopsend > 0 && lines_info[oopsend].ptr == NULL)
 			oopsend--;
 		for (q = oopsstart; q <= oopsend; q++)
-			len += strlen(lines_info[q].ptr)+1;
+			len += strlen(lines_info[q].ptr)+2;
 
 		oops = calloc(len, 1);
 

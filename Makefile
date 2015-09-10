@@ -10,31 +10,31 @@ LOCALESDIR=/usr/share/locale
 MANDIR=/usr/share/man/man8
 CC?=gcc
 
-CFLAGS := -O2 -g -fstack-protector -D_FORTIFY_SOURCE=2 -Wall -W -Wstrict-prototypes -Wundef -fno-common -Werror-implicit-function-declaration -Wdeclaration-after-statement -Wformat -Wformat-security -Werror=format-security
+CFLAGS ?= -O2 -g -fstack-protector -D_FORTIFY_SOURCE=2 -Wall -W -Wstrict-prototypes -Wundef -fno-common -Werror-implicit-function-declaration -Wdeclaration-after-statement -Wformat -Wformat-security -Werror=format-security
 
-MY_CFLAGS := `pkg-config --cflags libnotify gtk+-2.0 dbus-glib-1`
+MY_CFLAGS = $(shell pkg-config --cflags libnotify gtk+-2.0 dbus-glib-1)
 #
 # pkg-config tends to make programs pull in a ton of libraries, not all 
 # are needed. -Wl,--as-needed tells the linker to just drop unused ones,
 # and that makes the applet load faster and use less memory.
 #
-LDF_A := -Wl,--as-needed `pkg-config --libs libnotify gtk+-2.0 dbus-glib-1`
-LDF_D := -Wl,--as-needed `pkg-config --libs glib-2.0 dbus-glib-1` `curl-config --libs` -Wl,"-z relro" -Wl,"-z now" 
+LDF_A ?= -Wl,--as-needed $(shell pkg-config --libs libnotify gtk+-2.0 dbus-glib-1) $(LDFLAGS)
+LDF_D ?= -Wl,--as-needed $(shell pkg-config --libs glib-2.0 dbus-glib-1) $(shell curl-config --libs) -Wl,"-z relro" -Wl,"-z now" $(LDFLAGS)
 
 all:	kerneloops kerneloops-applet kerneloops.8.gz
 
 noui:	kerneloops kerneloops.8.gz
 
 .c.o:
-	$(CC) $(CFLAGS) $(MY_CFLAGS) -c -o $@ $<
- 
+	$(CC) $(MY_CFLAGS) $(CPPFLAGS) $(CFLAGS) -c -o $@ $<
+
 
 kerneloops:	kerneloops.o submit.o dmesg.o configfile.o kerneloops.h
 	gcc kerneloops.o submit.o dmesg.o configfile.o $(LDF_D) -o kerneloops
 	@(cd po/ && $(MAKE))
 
 kerneloops-applet: kerneloops-applet.o
-	gcc kerneloops-applet.o $(LDF_A)-o kerneloops-applet
+	gcc kerneloops-applet.o $(LDF_A) -o kerneloops-applet
 
 kerneloops.8.gz: kerneloops.8
 	gzip -9 -c $< > $@
