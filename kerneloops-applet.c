@@ -236,7 +236,7 @@ static void got_a_message(void)
 	char *summary = _("Your system had a kernel failure");
 	char *message =
 	       _("There is diagnostic information available for this failure."
-		" Do you want to submit this information to the <a href=\"http://oops.kernel.org/\">oops.kernel.org</a>"
+		" Do you want to submit this information to the http://oops.kernel.org/"
 		" website for use by the Linux kernel developers?\n");
 
 	NotifyActionCallback callback = notify_action;
@@ -292,16 +292,16 @@ static void sent_an_oops(void)
 	char *message = NULL;
 	char *message_1 =
 		_("Diagnostic information from your Linux kernel has been "
-		  "sent to <a href=\"http://oops.kernel.org\">oops.kernel.org</a> "
+		  "sent to http://oops.kernel.org/ "
 		  "for the Linux kernel developers to work on. \n"
 		  "Thank you for contributing to improve the quality of the Linux kernel.\n");
 
 	char *message_2 =
 		_("Diagnostic information from your Linux kernel has been "
-		  "sent to <a href=\"http://oops.kernel.org\">oops.kernel.org</a> "
+		  "sent to http://oops.kernel.org "
 		  "for the Linux kernel developers to work on. \n"
 		  "Thank you for contributing to improve the quality of the Linux kernel.\n"
-		"You can view your submitted oops <a href=\"%s\">here</a>\n");
+		"You can view your submitted oops here: %s\n");
 	NotifyActionCallback callback = notify_action;
 
 	close_notification();
