@@ -1,0 +1,148 @@
+#
+# spec file for package kerneloops
+#
+# Copyright (c) 2017 SUSE LINUX GmbH, Nuernberg, Germany.
+#
+# All modifications and additions to the file contributed by third parties
+# remain the property of their copyright owners, unless otherwise agreed
+# upon. The license for this file, and modifications and additions to the
+# file, is the same license as for the pristine package itself (unless the
+# license for the pristine package is not an Open Source License, in which
+# case the license is the MIT License). An "Open Source License" is a
+# license that conforms to the Open Source Definition (Version 1.9)
+# published by the Open Source Initiative.
+
+# Please submit bugfixes or comments via http://bugs.opensuse.org/
+#
+
+%if 0%{?suse_version} > 1220
+%define uses_systemd 1
+%else
+%define uses_systemd 0
+%endif
+
+Url:            http://oops.kernel.org
+Name:           kerneloops
+Version:        0.12
+Release:        0
+Summary:        Tool to collect kernel oopses and submit them to oops.kernel.org
+License:        GPL-2.0
+Group:          System/Kernel
+Source:         %{name}-%{version}.tar.bz2
+Source1:        %{name}.init
+BuildRequires:  curl-devel
+BuildRequires:  desktop-file-utils
+BuildRequires:  libcap-ng-devel
+BuildRequires:  update-desktop-files
+BuildRequires:  pkgconfig(dbus-glib-1)
+BuildRequires:  pkgconfig(gtk+-2.0)
+BuildRequires:  pkgconfig(libnotify)
+
+%if %{uses_systemd}
+BuildRequires:  pkgconfig(systemd)
+%{?systemd_requires}
+%else
+PreReq:         %insserv_prereq
+PreReq:         sysvinit(network)
+PreReq:         sysvinit(syslog)
+%endif
+
+BuildRoot:      %{_tmppath}/%{name}-%{version}-build
+
+%description
+oops.kernel.org is a website that tries to help the developers of the
+Linux kernel by collecting so-called oopses, which are the crash
+signatures of the Linux kernel. The collected oopses are processed
+statistically to present information for the kernel developers, such as
+ * Which crash signatures occur the most? (and thus need to be fixed
+   most urgently)
+ * When did a certain crash signature show up first?
+ * Which API functions are the most error prone?
+
+%package applet
+Summary:        Tool to collect kernel oopses and submit them to kerneloops
+Group:          System/Kernel
+Requires:       %{name} = %{version}
+
+%description applet
+oops.kernel.org is a website that tries to help the developers of the
+Linux kernel by collecting so-called oopses, which are the crash
+signatures of the Linux kernel. The collected oopses are processed
+statistically to present information for the kernel developers, such as
+ * Which crash signatures occur the most? (and thus need to be fixed
+    most urgently)
+ * When did a certain crash signature show up first?
+ * Which API functions are the most error prone?
+
+%prep
+%setup -q
+
+%build
+export CFLAGS="%{optflags}"
+make 
+
+%install
+make install DESTDIR=%{buildroot}
+
+%if %{uses_systemd}
+install -m 0755 %{SOURCE1} .
+install -D -m 0644 %{name}.service %{buildroot}%{_unitdir}/%{name}.service
+ln -s /sbin/service %{buildroot}%{_sbindir}/rc%{name}
+%else
+mkdir -p %{buildroot}%{_sysconfdir}/init.d
+install -D -m 0755 %{SOURCE1} %{buildroot}%{_initddir}/%{name}
+ln -s -f /etc/init.d/%{name}   %{buildroot}%{_sbindir}/rc%{name}
+%endif
+
+%find_lang %{name}
+%suse_update_desktop_file %{name}-applet System Monitor
+
+
+%pre
+%if %{uses_systemd}
+%service_add_pre %{name}.service
+%endif
+
+%post
+%if %{uses_systemd}
+%service_add_post %{name}.service
+%else
+%{fillup_and_insserv -f -y %{name}}
+%endif
+
+%preun
+%if %{uses_systemd}
+%service_del_preun %{name}.service
+%else
+%stop_on_removal %{name}
+%endif
+
+%postun
+%if %{uses_systemd}
+%service_del_postun %{name}.service
+%else
+%restart_on_update %{name}
+%insserv_cleanup
+%endif
+
+
+%files -f %{name}.lang 
+%defattr(-,root,root)
+%config(noreplace) %{_sysconfdir}/kerneloops.conf
+%{_sbindir}/kerneloops
+%{_sbindir}/rckerneloops
+%config %{_sysconfdir}/dbus-1/system.d/kerneloops.dbus
+%{_mandir}/man8/kerneloops.8.gz
+
+%if %{uses_systemd}
+%attr(0644,root,root) %config %{_unitdir}/%{name}.service
+%endif
+
+%files applet
+%defattr(-,root,root)
+%config %{_sysconfdir}/xdg/autostart/kerneloops-applet.desktop
+%{_bindir}/kerneloops-applet
+%dir %{_datadir}/%{name}
+%{_datadir}/%{name}/icon.png
+
+%changelog
