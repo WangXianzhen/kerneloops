@@ -216,6 +216,10 @@ void submit_queue(void)
 
 	if (testmode) {
 		print_queue();
+
+		if (opted_in == 1)
+			exit(EXIT_SUCCESS);
+
 		return;
 	}
 
@@ -286,6 +290,10 @@ void clear_queue(void)
 		free(oops);
 		oops = next;
 	}
+
+	if (testmode)
+		exit(EXIT_SUCCESS);
+
 	unlink_detail_file();
 	write_logfile(0, NULL);
 }

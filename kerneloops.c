@@ -150,6 +150,10 @@ int main(int argc, char**argv)
 		opted_in = 2;
 	}
 
+	/* Test DBUS and notification client, exit on submit_queue */
+	if (argc > 1 && strstr(argv[1], "--debug-dbus"))
+		opted_in = 1;
+
 	if (!opted_in && !testmode) {
 		fprintf(stderr, " [Inactive by user preference]");
 		return EXIT_SUCCESS;
@@ -202,7 +206,8 @@ int main(int argc, char**argv)
 		}
 	}
 
-	if (testmode) {
+	/* Disconnect dbus if not --debug-dbus */
+	if (testmode && opted_in == 2) {
 		g_main_loop_unref(loop);
 		dbus_bus_remove_match(bus, "type='signal',interface='org.kerneloops.submit.ping'", &error);
 		dbus_bus_remove_match(bus, "type='signal',interface='org.kerneloops.submit.permission'", &error);
