@@ -67,6 +67,9 @@ void read_config_file(char *filename)
 			free(line);
 			continue;
 		}
+		c = strchr(line, '\n');
+		if (c != NULL)
+			*c = '\0';
 		c = strstr(line, "allow-submit ");
 		if (c) {
 			c += 13;
