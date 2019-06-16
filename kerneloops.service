@@ -5,7 +5,6 @@ After=remote-fs.target nss-lookup.target network-online.target time-sync.target
 [Service]
 EnvironmentFile=-/etc/default/kerneloops
 Type=forking
-ExecStartPre=/usr/sbin/kerneloops --test
 ExecStart=/usr/sbin/kerneloops $DAEMON_ARGS
 
 [Install]
